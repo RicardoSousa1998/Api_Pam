@@ -1,0 +1,54 @@
+<script>
+function apagar(id){
+
+      const xhr = new XMLHttpRequest();
+            xhr.open("DELETE", "/del/"+ id);
+            xhr.responseType = "json";
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4) {
+                    if (this.status === 200) {
+                        
+                    } else {
+                        console.error("Erro ao pedir contacto ao servidor.");
+                    }
+                }
+            };
+            xhr.send();
+            window.location.replace("/");
+}
+
+
+</script>
+
+<main>
+<table>
+
+<tr>
+<td>id</td>
+<td>Nome</td>
+<td>Email</td>
+<td>Rating</td>
+<td>ReviewLimpeza</td>
+<td>ReviewEspaco</td>
+<td>ReviewNormasDGS</td>
+<td>ReviewDS</td>
+<td> apagar</td>
+
+<tr>
+
+{{#items}}
+<tr>
+<td>{{id}}</td>
+<td>{{Nome}}</td>
+<td>{{Email}}</td>
+<td>{{NotasAdicionais}}</td>
+<td>{{Rating}}</td>
+<td>{{ReviewLimpeza}}</td>
+<td>{{ReviewEspaco}}</td>
+<td>{{ReviewNormasDGS}}</td>
+<td>{{ReviewDS}}</td>
+<td><button onclick="apagar({{id}})">Apagar</button></td>
+</tr>
+{{/items}}
+</table>
+</main>
