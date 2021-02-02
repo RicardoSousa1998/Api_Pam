@@ -62,6 +62,6 @@ app.delete("/del/:id", (req, res) => {
 
 })
 
-app.listen(8080, () => {
-    console.log("Servidor ligado na porta " + 8080)
-})
+app.listen((process.env.PORT || 5000), function(){
+  console.log('listening on *:5000');
+});
