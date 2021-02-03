@@ -1,4 +1,6 @@
-const { response } = require('express');
+const {
+    response
+} = require('express');
 const express = require('express');
 const session = require("express-session");
 const mustacheExpress = require("mustache-express");
@@ -30,13 +32,27 @@ app.get("/", (req, res) => {
         if (err) {
             reject(err)
         } else {
-            res.render("lista",{
-                items:rows
+            res.render("lista", {
+                items: rows
             });
         }
     });
 
-   
+
+
+
+})
+
+
+app.post("/add", (req, res) => {
+    db.query('INSERT INTO `item` (`Nome`, `Email`, `NotasAdicionais`, `ReviewLimpeza`, `ReviewEspaco`, `ReviewNormasDGS`, `ReviewDS`,`Rating`) VALUES ( ?,?,?,?,?,?,?,? )', [req.body.Nome, req.body.Email, req.body.NotasAdicionais, req.body.ReviewLimpeza, req.body.ReviewEspaco,req.body.ReviewNormasDGS, req.body.ReviewDS, req.body.Rating], function (err, rows) {
+        if (err) {
+            throw(err)
+        } else {
+            return res.status(201).json(rows);
+        }
+    });
+
 
 
 })
@@ -50,18 +66,18 @@ app.get("/all", (req, res) => {
             return res.status(201).json(rows);
         }
     });
-   
+
 })
 
 app.delete("/del/:id", (req, res) => {
-    db.query('DELETE FROM item Where id = ? ',[req.params.id], function (err, rows) {
+    db.query('DELETE FROM item Where id = ? ', [req.params.id], function (err, rows) {
         if (err) {
-            throw(err)
-        } 
+            throw (err)
+        }
     });
 
 })
 
-app.listen((process.env.PORT || 5000), function(){
-  console.log('listening on *:5000');
+app.listen((process.env.PORT || 5000), function () {
+    console.log('listening on *:5000');
 });
