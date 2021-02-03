@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
 
 
 app.post("/add", (req, res) => {
-    db.query('INSERT INTO `item` (`Nome`, `Email`, `NotasAdicionais`, `ReviewLimpeza`, `ReviewEspaco`, `ReviewNormasDGS`, `ReviewDS`,`Rating`) VALUES ( ?,?,?,?,?,?,?,? )', [req.body.Nome, req.body.Email, req.body.NotasAdicionais, req.body.ReviewLimpeza, req.body.ReviewEspaco,req.body.ReviewNormasDGS, req.body.ReviewDS, req.body.Rating], function (err, rows) {
+    db.query('INSERT INTO item (Nome, Email, NotasAdicionais, reviewLimpeza, ReviewEspaco,ReviewNormasDGS, ReviewDS,Rating) VALUES ( ?,?,?,?,?,?,?,? )', [req.params.Nome, req.params.Email, req.params.NotasAdicionais, req.params.ReviewLimpeza, req.params.ReviewEspaco,req.params.ReviewNormasDGS, req.params.ReviewDS, req.params.Rating], function (err, rows) {
         if (err) {
             throw(err)
         } else {
