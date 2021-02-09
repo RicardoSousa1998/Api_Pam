@@ -9,6 +9,8 @@ const MySQLStore = require('express-mysql-session')(session);
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 app.engine('mustache', mustacheExpress());
 app.set('view engine', 'mustache');
@@ -43,7 +45,7 @@ app.get("/", (req, res) => {
 })
 
 app.post("/add", (req, res) => {
-    db.query('INSERT INTO item (Nome, Email, NotasAdicionais, reviewLimpeza, ReviewEspaco,ReviewNormasDGS, ReviewDS,Rating) VALUES ( ?,?,?,?,?,?,?,? )', [req.body.Nome, req.body.Email, req.body.NotasAdicionais, req.body.ReviewLimpeza, req.body.ReviewEspaco,req.body.ReviewNormasDGS, req.body.ReviewDS, req.body.Rating], function (err, rows) {
+    db.query('INSERT INTO item (Nome, Email, NotasAdicionais, reviewLimpeza, ReviewEspaco,ReviewNormasDGS, ReviewDS,Rating,TotalReviews) VALUES ( ?,?,?,?,?,?,?,?,?)', [req.body.Nome, req.body.Email, req.body.NotasAdicionais, req.body.ReviewLimpeza, req.body.ReviewEspaco,req.body.ReviewNormasDGS, req.body.ReviewDS, req.body.Rating,req.body.TotalReviews], function (err, rows) {
         if (err) {
             throw(err)
         } else {
@@ -55,15 +57,13 @@ app.post("/add", (req, res) => {
 
 
 app.put("/update", (req, res) => {
-    db.query('Update item SET reviewLimpeza=?, ReviewEspaco=?,ReviewNormasDGS=?, ReviewDS=?,Rating=?,TotalReviews=? WHERE id =?', [ req.body.ReviewLimpeza, req.body.ReviewEspaco,req.body.ReviewNormasDGS, req.body.ReviewDS, req.body.Rating,req.body.TotalReviews], function (err, rows) {
+    db.query('Update item SET reviewLimpeza=?, ReviewEspaco=?,ReviewNormasDGS=?, ReviewDS=?,Rating=?,TotalReviews=? WHERE id =?', [req.body.ReviewLimpeza, req.body.ReviewEspaco,req.body.ReviewNormasDGS, req.body.ReviewDS, req.body.Rating,req.body.TotalReviews], function (err, rows) {
         if (err) {
             throw(err)
         } else {
             return res.status(201).json(rows);
         }
     });
-
-
 
 })
 
