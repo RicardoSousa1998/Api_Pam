@@ -57,7 +57,7 @@ app.post("/add", (req, res) => {
 
 
 app.put("/update", (req, res) => {
-    db.query('Update item SET reviewLimpeza=?, ReviewEspaco=?,ReviewNormasDGS=?, ReviewDS=?,Rating=?,TotalReviews=? WHERE id =?', [req.body.ReviewLimpeza, req.body.ReviewEspaco,req.body.ReviewNormasDGS, req.body.ReviewDS, req.body.Rating,req.body.TotalReviews], function (err, rows) {
+    db.query('Update item SET reviewLimpeza=?, ReviewEspaco=?,ReviewNormasDGS=?, ReviewDS=?,Rating=?,TotalReviews=? WHERE id =?', [req.body.ReviewLimpeza, req.body.ReviewEspaco,req.body.ReviewNormasDGS, req.body.ReviewDS, req.body.Rating,req.body.TotalReviews,req.body.id], function (err, rows) {
         if (err) {
             throw(err)
         } else {
