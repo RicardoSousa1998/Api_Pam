@@ -20,13 +20,6 @@ app.set('views', __dirname + '/views');
 
 const mysql = require("mysql")
 
-const db = mysql.createPool({
-    host: "sql2.freemysqlhosting.net",
-    user: "sql2390157",
-    password: "pG2%bZ5*",
-    database: "sql2390157",
-    multipleStatements: true
-})
 app.use(express.static("./public"));
 
 
